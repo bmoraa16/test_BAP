@@ -6,6 +6,10 @@ import 'package:test_bap/data/network/api/endpoints/get_task_id_api.dart';
 import 'package:test_bap/data/network/api/endpoints/get_tasks_api.dart';
 import 'package:test_bap/data/network/api/endpoints/post_tasks_api.dart';
 import 'package:test_bap/data/network/api/endpoints/put_task_id_api.dart';
+import 'package:test_bap/data/network/repositories/add_tasks_repository.dart';
+import 'package:test_bap/data/network/repositories/delete_task_repository.dart';
+import 'package:test_bap/data/network/repositories/get_task_repository.dart';
+import 'package:test_bap/data/network/repositories/get_tasks_repository.dart';
 import 'package:test_bap/models/app_config.dart';
 
 class ServiceLocator {
@@ -29,7 +33,7 @@ class ServiceLocator {
             ),
           )
           ..registerSingleton(
-            GetTasksIdApi(
+            GetTaskIdApi(
               apiClient: getIt<ApiClient>(),
             ),
           )
@@ -48,11 +52,21 @@ class ServiceLocator {
               apiClient: getIt<ApiClient>(),
             ),
           )
-/*
-      // Remote repositories
-      ..registerLazySingleton(
-        () => PokemonRepository(getIt<PokemonApi>()),
-      )
+
+          // Remote repositories
+          ..registerLazySingleton(
+            () => TasksRepository(getIt<GetTasksApi>()),
+          )
+          ..registerLazySingleton(
+            () => TaskRepository(getIt<GetTaskIdApi>()),
+          )
+          ..registerLazySingleton(
+            () => AddTasksRepository(getIt<PostTasksApi>()),
+          )
+          ..registerLazySingleton(
+            () => DeleteTaskRepository(getIt<DeleteTaskIdApi>()),
+          )
+        /*
       ..registerLazySingleton(
         () => PokemonDetailsRepository(getIt<PokemonDetailsApi>()),
       )

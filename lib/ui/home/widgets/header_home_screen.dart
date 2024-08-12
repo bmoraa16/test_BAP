@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:test_bap/ui/add_task/add_task_screen.dart';
+import 'package:test_bap/ui/add_task/bloc/add_task_bloc.dart';
 import 'package:test_bap/utils/assets/asset_routes.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -29,8 +32,8 @@ class HeaderWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Brian Mora",
+                const Text(
+                  'Brian Mora',
                 ),
                 const SizedBox(
                   height: 5,
@@ -63,8 +66,26 @@ class HeaderWidget extends StatelessWidget {
                 shape: CircleBorder(),
               ),
               child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.add),
+                /*onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AddTaskScreen(),
+                  ),
+                ),
+                */
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return BlocProvider(
+                          create: (context) => TaskFormBloc(),
+                          child: const AddTaskScreen(),
+                        );
+                      },
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.add),
               ),
             ),
           ),

@@ -10,7 +10,7 @@ part 'json_gen/tasks.g.dart';
 class Tasks {
   int id;
   String title;
-  String isCompleted;
+  int isCompleted;
   String dueDate;
 
   Tasks({

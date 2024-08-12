@@ -6,7 +6,7 @@ import 'package:test_bap/ui/home/home.dart';
 void main() {
   const appConfig = AppConfig(
     appName: 'Test_tecnico_DEV',
-    apiUrl: 'https://pokeapi.co/api/v2',
+    apiUrl: 'https://ecsdevapi.nextline.mx/vdev/tasks-challenge/',
   );
   ServiceLocator.setupServiceLocator(appConfig);
   WidgetsFlutterBinding.ensureInitialized();
