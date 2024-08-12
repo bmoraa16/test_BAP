@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bap/models/task.dart';
-import 'package:test_bap/ui/home/bloc/home_bloc.dart';
 import 'package:test_bap/utils/constants/color_constants.dart';
 
 class BasicDialogWidget extends StatelessWidget {
@@ -9,11 +7,13 @@ class BasicDialogWidget extends StatelessWidget {
     required this.task,
     required this.backgroundColor,
     required this.delete,
+    required this.edit,
     super.key,
   });
   final Task task;
   final Color backgroundColor;
   final VoidCallback delete;
+  final VoidCallback edit;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -193,14 +193,7 @@ class BasicDialogWidget extends StatelessWidget {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   alignment: Alignment.center,
                 ),
-                /*
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AddTaskScreen(),
-                  ),
-                ),
-                */
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: edit.call,
                 child: Text(
                   'Editar\ntarea',
                   textAlign: TextAlign.center,

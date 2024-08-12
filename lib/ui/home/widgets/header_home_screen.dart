@@ -66,12 +66,6 @@ class HeaderWidget extends StatelessWidget {
                 shape: CircleBorder(),
               ),
               child: IconButton(
-                /*onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const AddTaskScreen(),
-                  ),
-                ),
-                */
                 onPressed: () {
                   Navigator.push(
                     context,
