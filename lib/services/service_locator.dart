@@ -8,6 +8,7 @@ import 'package:test_bap/data/network/api/endpoints/post_tasks_api.dart';
 import 'package:test_bap/data/network/api/endpoints/put_task_id_api.dart';
 import 'package:test_bap/data/network/repositories/add_tasks_repository.dart';
 import 'package:test_bap/data/network/repositories/delete_task_repository.dart';
+import 'package:test_bap/data/network/repositories/edit_tasks_repository.dart';
 import 'package:test_bap/data/network/repositories/get_task_repository.dart';
 import 'package:test_bap/data/network/repositories/get_tasks_repository.dart';
 import 'package:test_bap/models/app_config.dart';
@@ -65,6 +66,9 @@ class ServiceLocator {
           )
           ..registerLazySingleton(
             () => DeleteTaskRepository(getIt<DeleteTaskIdApi>()),
+          )
+          ..registerLazySingleton(
+            () => EditTasksRepository(getIt<PutTaskIdApi>()),
           )
         /*
       ..registerLazySingleton(

@@ -5,6 +5,8 @@ import 'package:test_bap/ui/common/basic_dialog_widget.dart';
 import 'package:test_bap/ui/common/basic_success_delete_dialog_widget.dart';
 import 'package:test_bap/ui/common/snack_bar_widget.dart';
 import 'package:test_bap/ui/common/spinner_loading_dialog.dart';
+import 'package:test_bap/ui/edit_task/bloc/edit_task_bloc.dart';
+import 'package:test_bap/ui/edit_task/edit_task_screen.dart';
 import 'package:test_bap/ui/home/bloc/home_bloc.dart';
 import 'package:test_bap/ui/home/widgets/header_home_screen.dart';
 import 'package:test_bap/ui/home/widgets/initial_screen.dart';
@@ -54,7 +56,25 @@ class _HomeBodyState extends State<HomeBody> {
                         ),
                       );
                 },
-                edit: () {},
+                edit: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => TaskFormBloc(),
+                        child: EditTaskScreen(
+                          id: taskData.id,
+                          title: taskData.title,
+                          isCompleted: taskData.isCompleted,
+                          dueDate: DateTime.parse(taskData.dueDate),
+                          comments: taskData.comments,
+                          description: taskData.description,
+                          tags: taskData.tags,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               );
             },
           );
@@ -75,13 +95,58 @@ class _HomeBodyState extends State<HomeBody> {
           return const InitialScreen();
         } else if (state is HomeSuccessState) {
           tasks.addAll(state.tasksComplete);
-          for (var i = 0; i < tasks.length; i++) {
-            if (tasks[i].isCompleted == 1) {
-              competedTasks++;
+          if (tasks.isEmpty) {
+            if (SpinnerDialog.isOpen(context)) {
+              SpinnerDialog.hideSpinner(context);
             }
-          }
-          if (SpinnerDialog.isOpen(context)) {
-            SpinnerDialog.hideSpinner(context);
+            return Container(
+              height: MediaQuery.of(context).size.height,
+              margin: const EdgeInsets.only(
+                top: 10,
+                left: 10,
+                right: 10,
+              ),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: ColorConstants.blueHome,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  HeaderWidget(
+                    totalTasks: 1,
+                    completedTasks: 0,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Divider(
+                    height: 0,
+                    thickness: 1,
+                    indent: 0,
+                    endIndent: 0,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Expanded(child: Text('No hay tareas creadas')),
+                ],
+              ),
+            );
+          } else {
+            for (var i = 0; i < tasks.length; i++) {
+              if (tasks[i].isCompleted == 1) {
+                competedTasks++;
+              }
+            }
+            if (SpinnerDialog.isOpen(context)) {
+              SpinnerDialog.hideSpinner(context);
+            }
           }
         } else if (state is LoadError) {
           return Center(
