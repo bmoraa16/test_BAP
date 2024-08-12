@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_bap/ui/add_task/bloc/add_task_bloc.dart';
-import 'package:test_bap/ui/add_task/widgets/add_task_body.dart';
 import 'package:test_bap/ui/edit_task/widgets/edit_task_body.dart';
 
 class EditTaskScreen extends StatefulWidget {

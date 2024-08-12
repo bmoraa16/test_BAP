@@ -3,17 +3,6 @@ part of 'edit_task_bloc.dart';
 enum FormStatus { initial, submitting, success, failure }
 
 class TaskFormState {
-  final int id;
-  final String title;
-  final int isCompleted;
-  final DateTime? dueDate;
-  final String comments;
-  final String description;
-  final String tags;
-  final bool isSubmitting;
-  final bool isFormValid;
-  final FormStatus formStatus;
-
   TaskFormState({
     this.id = 0,
     this.title = '',
@@ -26,6 +15,16 @@ class TaskFormState {
     this.isFormValid = true,
     this.formStatus = FormStatus.initial,
   });
+  final int id;
+  final String title;
+  final int isCompleted;
+  final DateTime? dueDate;
+  final String comments;
+  final String description;
+  final String tags;
+  final bool isSubmitting;
+  final bool isFormValid;
+  final FormStatus formStatus;
 
   TaskFormState copyWith({
     int? id,

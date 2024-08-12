@@ -34,15 +34,17 @@ class _EditTaskBodyScreenState extends State<EditTaskBodyScreen> {
   void initState() {
     super.initState();
 
-    context.read<TaskFormBloc>().add(LoadTaskData(
-          id: widget.id,
-          title: widget.title,
-          isCompleted: widget.isCompleted,
-          dueDate: widget.dueDate,
-          comments: widget.comments,
-          description: widget.description,
-          tags: widget.tags,
-        ));
+    context.read<TaskFormBloc>().add(
+          LoadTaskData(
+            id: widget.id,
+            title: widget.title,
+            isCompleted: widget.isCompleted,
+            dueDate: widget.dueDate,
+            comments: widget.comments,
+            description: widget.description,
+            tags: widget.tags,
+          ),
+        );
   }
 
   @override
@@ -112,10 +114,14 @@ class _EditTaskBodyScreenState extends State<EditTaskBodyScreen> {
                         '¿Completada?',
                         style: TextStyle(color: ColorConstants.inProgress),
                       ),
+                      // ignore: avoid_bool_literals_in_conditional_expressions
                       value: state.isCompleted == 0 ? false : true,
                       onChanged: (value) {
-                        context.read<TaskFormBloc>().add(CompletedChanged(
-                            isCompleted: value == false ? 0 : 1));
+                        context.read<TaskFormBloc>().add(
+                              CompletedChanged(
+                                isCompleted: value == false ? 0 : 1,
+                              ),
+                            );
                       },
                     );
                   },
